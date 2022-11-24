@@ -1,8 +1,6 @@
 // A word search in a nested arrays of letters
 const wordSearch = (letters, word) => {
-  if (Array.isArray(letters) === false) return false;
-  if (typeof word !== 'string') return false;
-  if (letters.length === 0 || word.length <= 1) return false;
+  if(wordSearchValidateArguments(letters, word) === false) return false;
   // Search horizontally for a match
   if (wordSearchHorizontal(letters, word)) return true;
   // Search vertically for a match
@@ -12,9 +10,7 @@ const wordSearch = (letters, word) => {
 
 // A horizontal word search in a nested arrays of letters
 const wordSearchHorizontal = (letters, word) => {
-  if (Array.isArray(letters) === false) return false;
-  if (typeof word !== 'string') return false;
-  if (letters.length === 0 || word.length <= 1) return false;
+  if(wordSearchValidateArguments(letters, word) === false) return false;
   // Join the elements of the nested arrays into words
   const joinedNestedArrays = horizontalJoin(letters);
   // Search horizontally for a match
@@ -27,9 +23,7 @@ const wordSearchHorizontal = (letters, word) => {
 
 // A horizontal word search in a nested arrays of letters
 const wordSearchVertical = (letters, word) => {
-  if (Array.isArray(letters) === false) return false;
-  if (typeof word !== 'string') return false;
-  if (letters.length === 0 || word.length <= 1) return false;
+  if(wordSearchValidateArguments(letters, word) === false) return false;
   // Join the elements of the nested arrays into words
   const joinedNestedArrays = horizontalJoin(letters);
   // Transpose the array, and then we can search horizontally for a match
@@ -37,6 +31,13 @@ const wordSearchVertical = (letters, word) => {
   // Search horizontally for a match
   if (wordSearchHorizontal(transposedArray, word)) return true;
   return false;
+}
+
+const wordSearchValidateArguments = (letters, word) => {
+  if (Array.isArray(letters) === false) return false;
+  if (typeof word !== 'string') return false;
+  if (letters.length === 0 || word.length <= 1) return false;
+  return true;
 }
 
 // Searches for a string within array elements
