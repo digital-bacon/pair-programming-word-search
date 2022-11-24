@@ -1,16 +1,16 @@
 // A word search in a nested arrays of letters
 const wordSearch = (letters, word) => {
-  if(wordSearchValidateArguments(letters, word) === false) return false;
+  if (wordSearchValidateArguments(letters, word) === false) return false;
   // Search horizontally for a match
   if (wordSearchHorizontal(letters, word)) return true;
   // Search vertically for a match
   if (wordSearchVertical(letters, word)) return true;
   return false;
-}
+};
 
 // A horizontal word search in a nested arrays of letters
 const wordSearchHorizontal = (letters, word) => {
-  if(wordSearchValidateArguments(letters, word) === false) return false;
+  if (wordSearchValidateArguments(letters, word) === false) return false;
   // Join the elements of the nested arrays into words
   const joinedNestedArrays = horizontalJoin(letters);
   // Search horizontally for a match
@@ -19,11 +19,11 @@ const wordSearchHorizontal = (letters, word) => {
   const reversedWordToFind = reverseString(word);
   if (foundInArray(joinedNestedArrays, reversedWordToFind)) return true;
   return false;
-}
+};
 
 // A horizontal word search in a nested arrays of letters
 const wordSearchVertical = (letters, word) => {
-  if(wordSearchValidateArguments(letters, word) === false) return false;
+  if (wordSearchValidateArguments(letters, word) === false) return false;
   // Join the elements of the nested arrays into words
   const joinedNestedArrays = horizontalJoin(letters);
   // Transpose the array, and then we can search horizontally for a match
@@ -31,14 +31,14 @@ const wordSearchVertical = (letters, word) => {
   // Search horizontally for a match
   if (wordSearchHorizontal(transposedArray, word)) return true;
   return false;
-}
+};
 
 const wordSearchValidateArguments = (letters, word) => {
   if (Array.isArray(letters) === false) return false;
   if (typeof word !== 'string') return false;
   if (letters.length === 0 || word.length <= 1) return false;
   return true;
-}
+};
 
 // Searches for a string within array elements
 const foundInArray = (array, stringToFind, caseSensitive = false) => {
@@ -49,29 +49,29 @@ const foundInArray = (array, stringToFind, caseSensitive = false) => {
     if (foundInString(element, stringToFind, caseSensitive)) return true;
   }
   return false;
-}
+};
 
 // Searches for a string within a string
 const foundInString = (lookInString, stringToFind, caseSensitive = false) => {
   if (typeof lookInString !== 'string' || typeof stringToFind !== 'string') return false;
   if (lookInString.length === 0 || stringToFind.length === 0) return false;
-  const regExpFlags = '';
+  let regExpFlags = '';
   if (caseSensitive) regExpFlags += 'i';
   const match = lookInString.match(stringToFind, regExpFlags);
   const wasFound = Array.isArray(match);
   return wasFound;
-}
+};
 
 // Joins elements of nested arrays to form a single word per array
 const horizontalJoin = (array) => array.map(element => element.join(''));
 
 const reverseString = (string) => {
   let result = '';
-  for (let letter = string.length-1; letter >= 0; letter --) {
+  for (let letter = string.length - 1; letter >= 0; letter--) {
     result += string[letter];
   }
   return result;
-}
+};
 
 // A function that will return a transposed version of a given 2D array
 const transpose = function(matrix) {
@@ -88,4 +88,4 @@ const transpose = function(matrix) {
   return output;
 };
 
-module.exports = wordSearch
+module.exports = wordSearch;
